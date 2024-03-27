@@ -60,7 +60,12 @@
           }
           window.del=del
 
-
+          
+          
+          
+          if(!localStorage.getItem("user_data")){
+            window.location="loginpage.html"
+        }
 
 
     logout.addEventListener("click",(e) =>{

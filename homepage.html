@@ -203,6 +203,11 @@
 
 
 
+
+             if(!localStorage.getItem("user_data")){
+                window.location="loginpage.html"
+            }
+
              logout.addEventListener("click",(e) =>{
                 localStorage.removeItem("user_data")
                 window.location="loginpage.html"
