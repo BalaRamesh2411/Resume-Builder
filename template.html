@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template</title>
+</head>
+<body>
+    <div class="container">
+    
+        <li> <a href="#" onclick="temp(1)">template-1</a> </li>
+        <li> <a href="">template-2</a> </li>
+        <li>  <a href="">template-3</a> </li>
+        <li> <a href="">template-4</a> </li>
+
+    </div>
+    <button id="logout">logout</button>
+</body>
+<script>
+    let params = new URLSearchParams(document.location.search);    
+    let id = params.get("id");
+    function temp(num){
+        if(num==1){
+            location=`template_1/index.html?id=${id}`
+        }
+    }
+
+
+
+    logout.addEventListener("click",(e) =>{
+        localStorage.removeItem("user_data")
+        window.location="loginpage.html"
+    })
+</script>
+</html>

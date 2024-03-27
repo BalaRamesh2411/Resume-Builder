@@ -1,0 +1,72 @@
+<script src="homepage.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view page</title>
+   
+
+</head>
+<body>
+    <h1>resume list</h1>
+    <ul id="list">
+
+    </ul>
+    
+    <button id="logout">logout</button>
+</body>
+<!-- <script >appresume()</script> -->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore,addDoc,collection ,getDocs, deleteDoc ,doc} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAiftRcxMwY0clDjZA5K0zPUV3eU61qOg",
+      authDomain: "my-resume-3911e.firebaseapp.com",
+      projectId: "my-resume-3911e",
+      storageBucket: "my-resume-3911e.appspot.com",
+      messagingSenderId: "419543526125",
+      appId: "1:419543526125:web:28c00c118e291d0d5e7ae4"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Initialize Cloud Firestore and get a reference to the service
+     const db = getFirestore(app);
+    
+
+     function get_resumelist(){
+        getDocs(collection(db,"resume")).then(docSnap =>{
+              let rander='';
+              docSnap.forEach((each) =>{
+             let eachresume=each.data();
+             rander=rander+`<li><a href="template.html?id=${each.id}">${eachresume.title}</a>
+                <button onclick="del('${each.id}')">delete</button></a>
+                <a href="edit.html?id=${each.id}"><button type='button' id='edit'>edit</button></a> </li>`
+              });
+              document.getElementById("list").innerHTML=rander
+          })
+        }
+        get_resumelist()
+
+          function del(del_id){
+          deleteDoc(doc(db,"resume",del_id))
+          get_resumelist()
+          }
+          window.del=del
+
+
+
+
+    logout.addEventListener("click",(e) =>{
+      localStorage.removeItem("user_data")
+      window.location="loginpage.html"
+  })
+      
+</script>
+</html>

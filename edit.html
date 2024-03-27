@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit page</title>
+    
+</head>
+<body>
+    <form >
+        <label >title:</label>
+        <input type="text"  id="up_date_title" ><br>
+        <label >Name:</label>
+        <input type="text"  id="up_date_name" ><br>
+        <label >email:</label>
+        <input type="text"  id="up_date_email" ><br>
+        <label >objective:</label>
+        <input type="text"  id="up_date_objective" ><br>
+        <label >declaration:</label>
+        <input type="text"  id="up_date_declaration" ><br>
+        <label >contact:</label>
+        <input type="number"  id="up_date_contact" ><br>
+        <label >place:</label>
+        <input type="text"  id="up_date_place" ><br>
+
+        <h1>personal details</h1>
+        <label >father's name:</label>
+        <input type="text"  id="up_date_father'sname" ><br>
+        <label >mother's name:</label>
+        <input type="text"  id="up_date_mother'sname" ><br>
+        <label >adderss:</label>
+        <input type="text"  id="up_date_adderss" ><br>
+        <label>dob:</label>
+        <input type="date" id="up_date_dob"><br>
+
+       <h2>skill</h2>
+        <div id="skill">   
+        </div>
+        <button type="button"  >add skills</button>
+        <h2>hobbies</h2>
+        <div id="hobbie">  
+        </div>
+        <button type="button" >add hobbies</button>
+        <h2>language</h2>
+        <div id="languages">
+        </div>
+        <button type="button" > add language</button>
+        <h2>area of intersted</h2>
+        <div id="area_of_interest">
+        </div>
+        <button type="button" >add area of intersted</button>
+        
+        <h2>education details</h2>
+        <table border="1">
+            <thead>
+                <th> int_name</th>
+                <th>course_name</th>
+                <th>persentage</th>
+                <th>pass_year</th>
+            </thead>
+            <tbody id="educatinput">
+
+            </tbody>
+        </table>
+        <button type="button" onclick="add_btn('educatinput')">add </button>
+
+        <h3>project:</h3>
+     <table border="3px solid blue">
+         <thead>
+             <th> pro_name:</th>
+             <th>org_name:</th>
+             <th>team_member:</th>
+             <th> duration:</th>
+         </thead>
+         <tbody id="pro_ject">       
+         </tbody>   
+     </table>
+     <button type="button" onclick="add_btn('pro_ject')">add </button><br>
+
+        <button type="button" id="update">update</button>
+    </form>
+
+</body>
+
+
+<script type="module">
+  /*  let params = new URLSearchParams(document.location.search);    
+    let index = params.get("index");*/
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore,addDoc,collection ,getDocs,updateDoc,doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAiftRcxMwY0clDjZA5K0zPUV3eU61qOg",
+      authDomain: "my-resume-3911e.firebaseapp.com",
+      projectId: "my-resume-3911e",
+      storageBucket: "my-resume-3911e.appspot.com",
+      messagingSenderId: "419543526125",
+      appId: "1:419543526125:web:28c00c118e291d0d5e7ae4"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Initialize Cloud Firestore and get a reference to the service
+     const db = getFirestore(app);
+     let params = new URLSearchParams(document.location.search);    
+     let index = params.get("id");
+    getDocs(collection(db,"resume")).then(edit =>{
+    edit.forEach((doc) =>{
+    if(index==doc.id){
+    let datas=doc.data()
+        document.getElementById("up_date_title").value=datas.title
+        document.getElementById("up_date_name").value=datas.name
+        document.getElementById("up_date_email").value=datas.email
+        document.getElementById("up_date_contact").value=datas.contact
+        document.getElementById("up_date_objective").value=datas.objective
+        document.getElementById("up_date_declaration").value=datas.declaration
+        document.getElementById("up_date_place").value=datas.place
+
+        // ********************personal details**********************
+        document.getElementById("up_date_father'sname").value=datas.personal_details.father_name
+        document.getElementById("up_date_mother'sname").value=datas.personal_details.mother_name
+        document.getElementById("up_date_adderss").value=datas.personal_details.address
+        document.getElementById("up_date_dob").value=datas.personal_details.dob
+    
+        //***********************skills*****************************
+        let skilladd=''
+        for(const each of datas.skills){
+            skilladd=skilladd+`<input class="skills" value=${each}  />`
+        }
+
+        document.getElementById("skill").innerHTML=skilladd
+
+        //***********************hobbies*****************************
+        let hobbieadd=''
+        for(const each of datas.hobbies){
+            hobbieadd=hobbieadd+`<input class="hobbies" value=${each}  />`
+        }
+
+        document.getElementById("hobbie").innerHTML=hobbieadd
+
+        //********************languages*************************
+        let languageadd=''
+        for(const each of datas.languages){
+            languageadd=languageadd+`<input class="languages" value=${each}  />`
+        }
+
+        document.getElementById("languages").innerHTML=languageadd
+
+
+        //********************area_of_interest*************************
+        let area_of_interestadd=''
+        for(const each of datas.area_of_interest){
+            area_of_interestadd=area_of_interestadd+`<input class="area_of_interestes" value=${each}  />`
+        }
+
+        document.getElementById("area_of_interest").innerHTML=area_of_interestadd
+
+
+
+          //***********************************for in loop education *************************************
+
+    
+     let editoperation=datas.education_details  
+     let updateeditdata="";
+     for(let eachdatas in datas.education_details){
+         updateeditdata=updateeditdata+`<tr>
+             <td><input type="text" value="${datas.education_details[eachdatas].int_name}" onkeyup="update_function(this,${eachdatas},'int_name','education_details')"/></td>
+             <td><input type="text" value="${datas.education_details[eachdatas].course_name}" onkeyup="update_function(this,${eachdatas},'course_name','education_details')"/></td>
+             <td><input type="text" value="${datas.education_details[eachdatas].persentage}" onkeyup="update_function(this,${eachdatas},'persentage','education_details')"/></td>
+             <td><input type="text" value="${datas.education_details[eachdatas].pass_year}"  onkeyup="update_function(this,${eachdatas},'pass_year','education_details')"/></td>
+         </tr>`
+         }
+         document.getElementById("educatinput").innerHTML=updateeditdata
+     
+ 
+     
+      //*************************************for in loop project**************************************
+      let  update_project=datas.project
+      let PROject=""
+      for(let each in update_project){
+        PROject=PROject+`<tr>
+            <td><input type=text value="${update_project[each].pro_name}"  onkeyup="update_function(this,'${each}','pro_name','project')"  /></td>
+            <td><input type=text value="${update_project[each].org_name}"  onkeyup="update_function(this,'${each}','org_name','project')"  /></td>
+            <td><input type=text value="${update_project[each].team_member}"  onkeyup="update_function(this,'${each}','team_member','project')"  /></td>
+            <td><input type=text value="${update_project[each].duration}"  onkeyup="update_function(this,'${each}','duration','project')"  /></td>
+        </tr>`
+     }
+            
+       document.getElementById("pro_ject").innerHTML=PROject
+       }
+    })
+    document.getElementById("update").addEventListener('click',async (e) =>  {
+       let TITLE=document.getElementById("up_date_title").value
+       let Name= document.getElementById("up_date_name").value
+      let Email=document.getElementById("up_date_email").value
+       let Place=document.getElementById("up_date_place").value
+       let Objective=document.getElementById("up_date_objective").value
+       let Declaration=document.getElementById("up_date_declaration").value
+       let Contact=document.getElementById("up_date_contact").value
+       /*****************personal details********************/
+       let f_name=document.getElementById("up_date_father'sname").value
+       let m_name=document.getElementById("up_date_mother'sname").value
+       let add_ress= document.getElementById("up_date_adderss").value
+       let DOB=document.getElementById("up_date_dob").value
+
+
+       /*******************************using class [skil,hob,aoi,lag]************************************************/
+       let Skills=document.getElementsByClassName("skills")
+       let Hobbie=document.getElementsByClassName("hobbies")
+       let Language=document.getElementsByClassName("languages")
+       let Area_of_Interest=document.getElementsByClassName("area_of_interestes")
+
+      let Updating_Skills=[]
+      let Updating_HObbies=[]
+      let Updating_Language=[]
+      let Updating_Area_of_Interest=[]
+
+
+
+      for(const each of Skills){
+        Updating_Skills.push(each.value)
+      }
+      for(const each of Hobbie){
+        Updating_HObbies.push(each.value)
+      }
+      for(const each of Language){
+        Updating_Language.push(each.value)
+      }
+      for(const each of Area_of_Interest){
+        Updating_Area_of_Interest.push(each.value)
+      }
+      
+
+
+
+       
+
+
+       await updateDoc(doc(db, "resume",index), {
+        title:TITLE,
+        name:Name,
+        email:Email,
+        place:Place,
+        objective:Objective,
+        declaration:Declaration,
+        contact:Contact,
+        personal_details:{
+            father_name:f_name,
+            mother_name:m_name,
+            address:add_ress,
+            dob:DOB,
+        },
+
+        skills:Updating_Skills,
+        hobbies:Updating_HObbies,
+        languages:Updating_Language,
+        area_of_interest:Updating_Area_of_Interest
+
+       });
+       window.location="view.html"
+       })
+       
+        })
+    
+        
+
+   
+   
+
+         
+
+ /*
+// *****************************single function in multi functioncall the edit page education and project****************************
+
+
+   function update_function(elem,index_no,key_word,prKey){
+    let params = new URLSearchParams(document.location.search);    
+    let index = params.get("index");
+    let existing=localStorage.getItem("resumes")                          
+    let existing_parsh=JSON.parse(existing);
+    existing_parsh[index][prKey][index_no][key_word]=elem.value
+    localStorage.setItem("resumes",JSON.stringify(existing_parsh))
+     }
+
+//********************external adding in edit page multi function[if,else condition] (skill,hobbies,areaof interested,language) *********************
+     function add_btn(id){
+
+
+        let params = new URLSearchParams(document.location.search);    
+        let index = params.get("index");
+        let existing=localStorage.getItem("resumes")                          
+        let existing_parsh=JSON.parse(existing);
+    
+        if(id=="skill"){    
+        let createbtn=document.createElement("input")
+        createbtn.setAttribute("type","text")
+        createbtn.setAttribute("placeholder","enter skill")
+        createbtn.setAttribute('class','skills')
+        document.getElementById("skill").appendChild(createbtn);
+        existing_parsh[index].skills.push(createbtn.value);
+    
+        }
+        else if(id=='hobbie'){
+            let createbtn=document.createElement("input")
+            createbtn.setAttribute("type","text")
+            createbtn.setAttribute("placeholder","enter hobbies")
+            createbtn.setAttribute("class","hobbies")
+            document.getElementById("hobbie").appendChild(createbtn)
+            existing_parsh[index].hobbies.push(createbtn.value);
+        }
+        else if(id=='languages'){
+            let createbtn=document.createElement("input")
+            createbtn.setAttribute("type","text")
+            createbtn.setAttribute("placeholder","enter languages")
+            createbtn.setAttribute("class","languages")
+            document.getElementById("languages").appendChild(createbtn)
+            existing_parsh[index].languages.push(createbtn.value);
+    
+        }
+        else if(id=='area_of_interest'){
+            let createbtn=document.createElement("input")
+            createbtn.setAttribute("type","text")
+            createbtn.setAttribute("placeholder","enter languages")
+            createbtn.setAttribute("class","area_of_interestes")
+            document.getElementById("area_of_interest").appendChild(createbtn)
+            existing_parsh[index].area_of_interest.push(createbtn.value);
+    
+        }
+      
+      else if(id=="educatinput"){
+        let education_length=existing_parsh[index].education_details.length;
+        let tbody=document.getElementById("educatinput").innerHTML
+        
+        let newdata=`<tr>
+            <td><input type="text" onkeyup="create(this,${education_length},'int_name','education_details')"/></td>
+            <td><input type="text"  onkeyup="create(this,${education_length},'course_name','education_details')"/></td>
+            <td><input type="text" onkeyup="create(this,${education_length},'persentage','education_details')"/></td>
+            <td><input type="text"   onkeyup="create(this,${education_length},'pass_year','education_details')"/></td>
+        </tr>`        
+        existing_parsh[index].education_details[education_length]={
+            int_name: "",
+            course_name:"",
+            persentage:"",
+            pass_year:""
+        }
+        document.getElementById("educatinput").innerHTML=tbody+newdata
+    }
+        
+        else if(id=="pro_ject"){
+            let project_length=existing_parsh[index].project.length;
+            let tbody=document.getElementById("pro_ject").innerHTML
+            existing_parsh[index]. project[project_length]={
+                pro_name:"",
+                org_name:"",
+                team_member:'',
+                duration:""
+            }
+            let newdata=`<tr>
+                <td><input type=text   onkeyup="create(this,'${project_length}','pro_name','project')"  /></td>
+                <td><input type=text   onkeyup="create(this,'${project_length}','org_name','project')"  /></td>
+                <td><input type=text   onkeyup="create(this,'${project_length}','team_member','project')"  /></td>
+                <td><input type=text   onkeyup="create(this,'${project_length}','duration','project')"  /></td>
+            </tr>`
+            
+            document.getElementById("pro_ject").innerHTML=tbody+newdata
+            }
+        
+        localStorage.setItem("resume_details",JSON.stringify(existing_parsh))
+    
+    }
+
+    function create(ele, ele_index, key, par_key) {
+        let params = new URLSearchParams(document.location.search);
+        let index = params.get("index");
+        let existing=localStorage.getItem("resumes")                          
+        let existing_parsh=JSON.parse(existing);
+        
+        existing_parsh[index][par_key][ele_index][key]=ele.value;
+        localStorage.setItem("resumes", JSON.stringify(existing_parsh))
+    }
+
+
+
+function update_title(){ 
+    let params = new URLSearchParams(document.location.search);     
+    let index = params.get("index");
+    //********************* updateing********************
+   let  updateTitle= document.getElementById("up_date_title").value
+   existing_parsh[index].title=updateTitle
+
+   let updateName=document.getElementById("up_date_name").value
+   existing_parsh[index].name=updateName
+
+   let updateEmail= document.getElementById("up_date_email").value
+   existing_parsh[index].email=updateEmail
+
+   let updateContact= document.getElementById("up_date_contact").value
+   existing_parsh[index].contact=updateContact
+
+   let updateObjective=document.getElementById("up_date_objective").value
+   existing_parsh[index].objective=updateObjective
+
+   let updateDeclaration= document.getElementById("up_date_declaration").value
+   existing_parsh[index].declaration=updateDeclaration
+
+   let updatePlace= document.getElementById("up_date_place").value
+   existing_parsh[index].place=updatePlace
+   
+
+   //*************************personal details*********************
+   let update_fathername=document.getElementById("up_date_father'sname").value
+   existing_parsh[index].personal_details.father_name=update_fathername
+
+   let update_mothername=document.getElementById("up_date_mother'sname").value
+   existing_parsh[index].personal_details.mother_name=update_mothername
+
+   let up_date_adderss=document.getElementById("up_date_adderss").value
+   existing_parsh[index].personal_details.address= up_date_adderss
+
+   let up_date_DOB=document.getElementById("up_date_dob").value
+   existing_parsh[index].personal_details.dob= up_date_DOB
+ 
+
+
+
+   //*************************skills updating in for loop*****************************
+    let updateSkills=document.getElementsByClassName("skills")
+    let finalSkills=[]
+   for(let each of updateSkills){
+    finalSkills.push(each.value)
+   }
+   existing_parsh[index].skills= finalSkills
+
+    //*************************hobbies updating in for loop*****************************
+    let updateHobbies=document.getElementsByClassName("hobbies")
+    finalhobbies=[]
+    for(let each of updateHobbies){
+        finalhobbies.push(each.value)
+    }
+    existing_parsh[index].hobbies= finalhobbies
+
+    //*************************language updating in for loop*****************************
+        let updateLanguage=document.getElementsByClassName("languages")
+        final_language=[]
+        for(let each of updateLanguage){
+            final_language.push(each.value)
+        }
+        existing_parsh[index].languages= final_language
+
+        //*************************area_of_interestes updating in for loop*****************************
+    let updateArea_of_interest=document.getElementsByClassName("area_of_interestes")
+    final_area_of_interest=[]
+    for(let each of updateArea_of_interest){
+        final_area_of_interest.push(each.value)
+    }
+    existing_parsh[index].area_of_interest= final_area_of_interest
+
+localStorage.setItem("resumes",JSON.stringify( existing_parsh))
+window.location="view.html"
+  
+}
+
+*/
+
+
+
+</script>
+
+</html>

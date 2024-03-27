@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <script src="homepage.js"></script>
+    
+</head>
+<body>
+  
+        
+                <div>
+                    <header> <h1>RESUME BUILDER </h1></header>
+                </div>
+            <form action="" id="form">
+                <div class="main"> 
+                    <div class="container">
+                        <label for="">title:</label>
+                        <input onkeyup="get(this,'title')" type="text" placeholder="enter the title">
+                    </div>
+                    <div class="container">
+                        <label for="">name:</label>
+                        <input onkeyup="get(this,'name')" type="text" placeholder="enter the name">
+                        
+                    </div>
+                    <div class="container">
+                        <label for="">email:</label>
+                        <input onkeyup="get(this,'email')" type="email" placeholder="enter the email">
+                        
+                    </div>
+                    <div class="container">
+                        <label for="">place:</label>
+                        <input onkeyup="get(this,'place')" type="text" placeholder="enter the place">
+                        
+                    </div>
+                    <div class="container">
+                        <label for="">objective:</label>
+                        <input onkeyup="get(this,'objective')" type="text" placeholder="enter the objective">
+                        
+                    </div>
+                    <div class="container">
+                        <label for="">declaration:</label>
+                        <input onkeyup="get(this,'declaration')" type="text" placeholder="enter the declaration">
+                        
+                    </div>
+                    <div class="container">
+                        <label for="">contact:</label>
+                        <input onkeyup="get(this,'contact')" type="number" placeholder="enter the contact">
+                        
+                    </div>
+                
+                <h2>skills</h2>
+                <div>
+                    <label for="">skills</label>
+                    <input id="add"  type="text" placeholder="enter the skills"/>
+                    <button onclick="array('skills','add')" type="button">add</button>
+                </div>
+                <h2>hobbies</h2>
+                <div>
+                    <label>hobbies</label>
+                    <input type="text" id="hobby" placeholder="enter the hobbies"/>
+                    <button type="button" onclick="array('hobbies','hobby')" >Add</button>
+                </div>
+                <h2>languages</h2>
+                <div>
+                    <label>languages</label>
+                    <input type="text" id="language" placeholder="enter the languages"/>
+                    <button type="button" onclick="array('languages','language')" >Add</button>
+                </div>
+                <h2>area of interest</h2>
+                <div>
+                    <label>area of interest</label>
+                    <input type="text" id="interest" placeholder="enter area_of_interestes"/>
+                    <button type="button" onclick="array('area_of_interest','interest')" >Add</button>
+                </div>
+                
+                
+                    <h2>personal details</h2>
+                    
+                    <div class="child-2">
+                        <label for="">father's name:</label>
+                        <input type="text" onkeyup="get(this,'father_name','personal_details')" placeholder="enter the father name">
+                    </div>
+                    <div class="child-2">
+                        <label for="">mother's name:</label>
+                        <input type="text" onkeyup="get(this,'mother_name','personal_details')" placeholder="enter the mother name">
+                    </div>
+                    <div class="child-2">
+                    
+                        <label for="">adderss:</label>
+                        <textarea inputtype="text" onkeyup=" get(this,'address','personal_details')" placeholder="enter the adderss">
+                        </textarea>
+                    </div>
+                    <div class="child-2">
+                            <label for="">dob</label>
+                            <input type="date" placeholder="enter the dob" onkeyup="get(this,'dob','personal_details')">
+                    </div>
+                </div>
+                <h1>education_details</h1>
+                <div class="inner_container">
+                    <h2>SSLC</h2>
+                    <label >int_name</label>
+                    <input type="text" onkeyup="get(this,'education_details', false,0,'int_name')" placeholder="enter the institute name" />
+                    <label >course_name</label>
+                    <input type="text" onkeyup="get(this,'education_details', false,0,'course_name')"  placeholder="enter the course name" />
+                    <label >persentage</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,0,'persentage')"  placeholder="enter the persentage" />
+                    <label >pass_year</label>
+                    <input type="number" onkeyup="get(this,'education_details',false,0,'pass_year')"  placeholder="enter the passing year" />
+                </div>
+                <div class="inner_container">
+                    <h2>HSC</h2>
+                    <label >int_name</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,1,'int_name')" placeholder="enter the institute name" />
+                    <label >course_name</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,1,'course_name')" placeholder="enter the course name" />
+                    <label >persentage</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,1,'persentage')" placeholder="enter the persentage" />
+                    <label >pass_year</label>
+                    <input type="number" onkeyup="get(this,'education_details',false,1,'pass_year')"  placeholder="enter the passing year" />
+                </div>
+                <div class="inner_container">
+                    <h2>UG</h2>
+                    <label >int_name</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,2,'int_name')" placeholder="enter the institute name" />
+                    <label >course_name</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,2,'course_name')" placeholder="enter the course name" />
+                    <label >persentage</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,2,'persentage')" placeholder="enter the persentage" />
+                    <label >pass_year</label>
+                    <input type="number" onkeyup="get(this,'education_details',false,2,'pass_year')"  placeholder="enter the passing year" />
+                </div>
+                <div class="inner_container">
+                    <h2>PG</h2>
+                    <label >int_name</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,3,'int_name')" placeholder="enter the institute name" />
+                    <label >course_name</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,3,'course_name')" placeholder="enter the course name" />
+                    <label >persentage</label>
+                    <input type="text" onkeyup="get(this,'education_details',false,3,'persentage')" placeholder="enter the persentage" />
+                    <label >pass_year</label>
+                    <input type="number" onkeyup="get(this,'education_details',false,3,'pass_year')"  placeholder="enter the passing year" />
+                </div>
+                <h1>project</h1>
+                <div >
+                    <h3>project1</h3>
+                    <input type="text" onkeyup="get(this,'project',false,0,'pro_name')" placeholder=" enter the project name">
+                    <input type="text" onkeyup="get(this,'project',false,0,'org_name')" placeholder=" enter the org_name">
+                    <input type="text" onkeyup="get(this,'project',false,0,'team_member')" placeholder=" enter the team_member">
+                    <input type="text" onkeyup="get(this,'project',false,0,'duration')" placeholder=" enter the duraition">
+                </div>
+                <div>
+                    <h3>project2</h3>
+                    <input type="text" onkeyup="get(this,'project',false,1,'pro_name')" placeholder=" enter the project name">
+                    <input type="text" onkeyup="get(this,'project',false,1,'org_name')" placeholder=" enter the org_name">
+                    <input type="text" onkeyup="get(this,'project',false,1,'team_member')" placeholder=" enter the team_member">
+                    <input type="text" onkeyup="get(this,'project',false,1,'duration')" placeholder=" enter the duraition">
+                </div>
+                <div>
+                    <h3>project3</h3>
+                    <input type="text" onkeyup="get(this,'project',false,2,'pro_name')" placeholder=" enter the project name">
+                    <input type="text" onkeyup="get(this,'project',false,2,'org_name')" placeholder=" enter the org_name">
+                    <input type="text" onkeyup="get(this,'project',false,2,'team_member')" placeholder=" enter the team_member">
+                    <input type="text" onkeyup="get(this,'project',false,2,'duration')" placeholder=" enter the duraition">
+                </div><br>
+                </div> 
+                <div>
+                    <button type="button"  id="submit" >submit</button>
+                </div>
+            </form>
+              
+                <button id="logout">logout</button>
+           
+     
+    </body>
+    </html>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore,addDoc,collection  } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDAiftRcxMwY0clDjZA5K0zPUV3eU61qOg",
+          authDomain: "my-resume-3911e.firebaseapp.com",
+          projectId: "my-resume-3911e",
+          storageBucket: "my-resume-3911e.appspot.com",
+          messagingSenderId: "419543526125",
+          appId: "1:419543526125:web:28c00c118e291d0d5e7ae4"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // Initialize Cloud Firestore and get a reference to the service
+         const db = getFirestore(app);
+         document.getElementById("submit").addEventListener('click', async (e) =>  {
+            const docRef= await addDoc(collection(db,"resume"),myresume);
+             window.location="view.html"  })
+
+
+
+
+             logout.addEventListener("click",(e) =>{
+                localStorage.removeItem("user_data")
+                window.location="loginpage.html"
+            })
+    </script>
+      

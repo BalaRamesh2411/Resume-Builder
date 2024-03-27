@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register page</title>
+</head>
+<body>
+    <h1>Welcome to Resume Builder</h1>
+    <div>
+        <h1>register</h1>
+        <div class="container">
+            <label>Name:</label>
+            <input type="text" id="name"  placeholder="Enter The email"/>
+        </div>
+        <div class="container">
+            <label for="">Email:</label>
+            <input type="email" id="email" placeholder="Enter The email" />
+        </div>
+        <div class="container">
+            <label for="">Password:</label>
+            <input type="password" id="password" placeholder="Enter The password" />
+        </div>
+        <div>        
+            <button type="button" id="register">register</button>
+        </div>
+        <div>
+            <p>Already I have an account?<a href="loginpage.html">Login</a></p>
+        </div>
+    </div>
+    
+</body>
+</html>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore,addDoc,collection } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAiftRcxMwY0clDjZA5K0zPUV3eU61qOg",
+      authDomain: "my-resume-3911e.firebaseapp.com",
+      projectId: "my-resume-3911e",
+      storageBucket: "my-resume-3911e.appspot.com",
+      messagingSenderId: "419543526125",
+      appId: "1:419543526125:web:28c00c118e291d0d5e7ae4"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Initialize Cloud Firestore and get a reference to the service
+     const db = getFirestore(app);
+     
+
+
+     register.addEventListener('click',async (e) =>  {
+
+        var name=document.getElementById("name").value
+        var email=document.getElementById("email").value
+        var password=document.getElementById("password").value
+        let find=await addDoc(collection(db, 'register'), {
+            name: name,
+            email_id:email,
+            password: password,
+            
+        });
+        alert("users register")
+        const id=find.id
+        location=`loginpage.html?id=${id}`
+    });   
+ 
+  </script>
