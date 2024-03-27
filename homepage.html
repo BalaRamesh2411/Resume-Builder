@@ -196,8 +196,14 @@
         const app = initializeApp(firebaseConfig);
         // Initialize Cloud Firestore and get a reference to the service
          const db = getFirestore(app);
+
+
+        
+
          document.getElementById("submit").addEventListener('click', async (e) =>  {
-            const docRef= await addDoc(collection(db,"resume"),myresume);
+            let local_data=localStorage.getItem("user_data")
+            let parse_local_data=JSON.parse(local_data)
+            const docRef= await addDoc(collection(db,"resume"),{...myresume,UserId:parse_local_data.Id});
              window.location="view.html"  })
 
 

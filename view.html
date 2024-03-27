@@ -20,7 +20,7 @@
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore,addDoc,collection ,getDocs, deleteDoc ,doc} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { getFirestore,addDoc,collection ,query,where,getDocs, deleteDoc ,doc} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
@@ -41,7 +41,9 @@
     
 
      function get_resumelist(){
-        getDocs(collection(db,"resume")).then(docSnap =>{
+      let local_data=localStorage.getItem("user_data")
+            let parse_local_data=JSON.parse(local_data)
+        getDocs(query(collection(db,"resume"),where("UserId","==",parse_local_data.Id))).then(docSnap =>{
               let rander='';
               docSnap.forEach((each) =>{
              let eachresume=each.data();
