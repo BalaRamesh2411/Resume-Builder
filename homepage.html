@@ -204,7 +204,7 @@
             let local_data=localStorage.getItem("user_data")
             let parse_local_data=JSON.parse(local_data)
             const docRef= await addDoc(collection(db,"resume"),{...myresume,UserId:parse_local_data.Id});
-             window.location="view.html"  })
+             window.location="view.html" })
 
 
 

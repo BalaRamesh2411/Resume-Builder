@@ -63,7 +63,7 @@
             }
             let user_data=false
             loginpage.forEach((each) =>{
-                let datas=each.data()
+            let datas=each.data()
                 if(email==datas.email_id && password==datas.password){
                     user_data={
                         email_id:datas.email_id,
@@ -74,7 +74,7 @@
                     alert('loggin successfull')
                     console.log(user_data)
                     localStorage.setItem("user_data",JSON.stringify(user_data))
-                    window.location=`homepage.html?id=${each.id}`
+                    window.location=`homepage.html`
                     user_data=true
                           
                 }
