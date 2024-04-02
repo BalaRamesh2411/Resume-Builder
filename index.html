@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login page</title>
-    <script src="revision.js"></script>
+
 </head>
 <body>
     <div>
@@ -18,109 +18,14 @@
             <input type="password" id="password" placeholder="Enter The password" />
         </div>
         <div>        
-            <button type="button" id="login">login</button>
+            <button type="button" id="login" onclick="loginData()">login</button>
         </div>
         <p>Do you haven't account please register?<a href="registerpage.html" >register here</a></p>
 
     </div>
     
+    <script type="module" src="firebase.js"></script>
 </body>
+
+
 </html>
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore,collection,getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDAiftRcxMwY0clDjZA5K0zPUV3eU61qOg",
-      authDomain: "my-resume-3911e.firebaseapp.com",
-      projectId: "my-resume-3911e",
-      storageBucket: "my-resume-3911e.appspot.com",
-      messagingSenderId: "419543526125",
-      appId: "1:419543526125:web:28c00c118e291d0d5e7ae4"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    // Initialize Cloud Firestore and get a reference to the service
-     const db = getFirestore(app);
-
-
-     let params = new URLSearchParams(document.location.search);    
-     let id = params.get("id");
-
-     login.addEventListener('click',(e)  =>  {
-        getDocs(collection(db,"register")).then(loginpage =>{
-            let email=document.getElementById("email").value
-                let password=document.getElementById("password").value
-               
-            if(email==""   && password==""){
-                alert("please fill the details")
-                return
-            }
-            let user_data=false
-            loginpage.forEach((each) =>{
-            let datas=each.data()
-                if(email==datas.email_id && password==datas.password){
-                    user_data={
-                        email_id:datas.email_id,
-                        name:datas.name,
-                        Id:each.id
-                       
-                    }
-                    alert('loggin successfull')
-                    console.log(user_data)
-                    localStorage.setItem("user_data",JSON.stringify(user_data))
-                    window.location=`homepage.html`
-                    user_data=true
-                          
-                }
-                })
-                if(!user_data){
-                    alert("yours password or email incorrect")
-                }
-            })
-            })
-            
-                /*
-            if(id==each.id){
-                let emails=document.getElementById("email").value
-                let passwords=document.getElementById("password").value
-                let data=each.data()
-                if(emails==data.email && passwords==data.password){
-                let user_data={
-                    email_id:data.email,
-                    name:data.name,
-                    id:each.id
-                   
-                }
-                alert('loggin successfull')
-                console.log(user_data)
-                localStorage.setItem("user_datas",JSON.stringify(user_data))
-                window.location=`homepage.html`
-                      }
-                 
-            else if(emails==data.email && passwords==data.password){
-            let user_data={
-                email_id:data.email,
-                name:data.name,
-                id:each.id
-               
-            }
-            alert('logginh success full')
-            localStorage.setItem("user_data",JSON.stringify(user_data))
-            window.location=`homepage.html?id=${each.id}`
-        }
-    }
-    })
-    })
-     })
-    
-*/
-     
-
-
-</script>

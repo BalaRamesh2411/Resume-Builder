@@ -70,70 +70,15 @@ function get(ele,key,p_key,index,c_key){
     }
     
  }
- /*let resume=[];                         /* values local storage store panna
- function save(){
-resume.push(myresume);
-let savesend=JSON.stringify(resume)
-localStorage.setItem("resum",savesend)      /*session storageit store the data temporary
-alert('submit')
-document.getElementById("form").reset()
- }*/
- /* 
-function saved(){
-    alert('submit')
-    if(!localStorage.getItem("resumes")){
-        localStorage.setItem("resumes",JSON.stringify([]))
-    }
-    let existing=localStorage.getItem("resumes")    //get data in localstorage
-    let existing_parsh=JSON.parse(existing)
-    let updating_list=[...existing_parsh,myresume]       //push  the data in list
-    let updating_list_item=JSON.stringify(updating_list)
+// *****************************single function in multi functioncall the edit page education and project****************************
+  
+  
+function update_function(elem,index_no,key_word,prKey){
+    let params = new URLSearchParams(document.location.search);    
+    let index = params.get("index");
     
-    localStorage.setItem("resumes",updating_list_item)
-    document.getElementById("form").reset()
-    window.location="view.html"
-}
-
-  
-
- function appresume(){
-    let existing=localStorage.getItem("resumes")
-    let existing_parsh=JSON.parse(existing)
-    let rander="";
-    for (const each in existing_parsh) {
-        rander=rander+`<li><a href="viewpage.html?index=${each}">${existing_parsh[each].title}</a>
-        <button onclick="remove(${each})">delete</button>
-        <a href="edit.html?index=${each}"><button>edit</button></a> </li>`             
-    }
-    document.getElementById("list").innerHTML=rander
-}
-  
-
-
-
-
-
-
-
-
-// remove function
-function remove(del){
-let newresume=[];
-let getdata=localStorage.getItem("resumes")
-let parsedata=JSON.parse(getdata)                               //convert to object
-  for(let each in parsedata){
-
-    if( each!= del){
-            
-            newresume.push( parsedata[each])
-    }
-    localStorage.setItem("resumes",JSON.stringify(newresume))
-  window. location="view.html"
-  }
-  
+    myresume[prKey][index_no][key_word]=elem.value
    
 }
 
-
-*/
 
