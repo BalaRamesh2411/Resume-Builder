@@ -20,7 +20,7 @@
             <a href="resume.html" class="nav-link">RESUME</a>
             <a href="portfolio.html" class="nav-link">PORTFOLIO</a>
             <a href="blog.html" class="nav-link">BLOG</a>
-            <a id="logout"  href="#" class="nav-link">Logout</a>
+            <a id="logout"  href="#" class="nav-link" onclick="logout()">Logout</a>
         </nav>
         <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav"
             data-target="collapsible-nav"><img src="assets/images/hamburger.svg" alt="hamburger"></button>
@@ -268,121 +268,27 @@
     <script src="assets/js/live-resume.js"></script>
 
 
-    <!-- <script src="../template.js"></script> -->
+    
 
 </body>
-<script type="module">
-    /*  let params = new URLSearchParams(document.location.search);    
-      let index = params.get("index");*/
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-      import { getFirestore,addDoc,collection ,getDocs,updateDoc,doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyDAiftRcxMwY0clDjZA5K0zPUV3eU61qOg",
-        authDomain: "my-resume-3911e.firebaseapp.com",
-        projectId: "my-resume-3911e",
-        storageBucket: "my-resume-3911e.appspot.com",
-        messagingSenderId: "419543526125",
-        appId: "1:419543526125:web:28c00c118e291d0d5e7ae4"
-      };
-    
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      // Initialize Cloud Firestore and get a reference to the service
-       const db = getFirestore(app);
-       let params = new URLSearchParams(document.location.search);    
-       let index = params.get("id");
-      getDocs(collection(db,"resume")).then(edit =>{
-      edit.forEach((doc) =>{
-      if(index==doc.id){
-      let datas=doc.data()
-          document.getElementById("re_title").innerHTML=datas.title
-          document.getElementById("re_name").innerHTML=datas.name
-          document.getElementById("re_name_1").innerHTML=` ${datas.name}`
-          document.getElementById("re_email").innerHTML=`EMAIL ID:${datas.email}`
-          document.getElementById("re_contact").innerHTML=`CONTACT : ${datas.contact}`
-          document.getElementById("re_objective").innerHTML=datas.objective
-          document.getElementById("re_declaration").innerHTML=datas.declaration
-          document.getElementById("re_place").innerHTML=`Location :${datas.place}`
-          document.getElementById("re_dob").innerHTML=`BIRTHDAY :${datas.personal_details.dob}`
-          
-
-
-        //***********************skills*****************************
-          let skilladd=''
-        for(const each of datas.skills){
-            skilladd=skilladd+`<p>${each}</p>`
-        }
-
-        document.getElementById("re_skills").innerHTML=skilladd
-         //***********************hobbies*****************************
-        let hobbieadd=''
-        for(const each of datas.hobbies){
-            hobbieadd=hobbieadd+`<p>${each}</p> `
-        }
-
-        document.getElementById("re_hobbies").innerHTML=hobbieadd
-
-        //********************languages*************************
-        let languageadd=''
-        for(const each of datas.languages){
-            languageadd=languageadd+`<p>${each}</p>`
-        }
-
-        document.getElementById("re_language").innerHTML=languageadd
-
-
-        //********************area_of_interest*************************
-        let area_of_interestadd=''
-        for(const each of datas.area_of_interest){
-            area_of_interestadd=area_of_interestadd+`<p>${each}</p> `
-        }
-
-        document.getElementById("re_area_of interest").innerHTML=area_of_interestadd
-
-
-     //*********************for loop education********************************
-     let empty_education=""
-     for(let each of datas.education_details){
-       empty_education=empty_education+` <li class="time-line-item">
-                           <span class="badge badge-primary">${each.pass_year}</span>
-                           <h3 class="time-line-item-title">${each.course_name}</h3>
-                           <p class="time-line-item-subtitle">${each.persentage}</p>
-                            <p class="time-line-item-subtitle">${each.int_name}</p>
-                       </li>`
-     }
-     document.getElementById("re_education").innerHTML=empty_education
-
-     //*************************************for in loop project**************************************
-     
-     let PROject=""
-     for(let each of datas.project){
-       PROject=PROject+` <li class="time-line-item">
-        <span class="badge badge-primary">${each. duration}</span>
-        <h3 class="time-line-item-title">${each.pro_name}</h3>
-        <p class="time-line-item-subtitle">${each.team_member}</p>
-         <p class="time-line-item-subtitle">${each.org_name}</p>
-       </li>`
-     }
-           
-      document.getElementById("re_project").innerHTML=PROject
-
-
-
-      }
-
-      })
-      logout.addEventListener("click",(e) =>{
+<script type="module" src="../firebase.js"></script>
+<script type="module">edit_temp()</script>
+<!-- <script type="module">
+    logout.addEventListener("click",(e) =>{
         localStorage.removeItem("user_data")
         window.location="../index.html"
     })
-      })
-    
-      </script>
-     
-  
+</script> -->
+<script>
+
+    if(!localStorage.getItem("user_data")){
+        window.location="../index.html"
+    }
+
+
+    function logout(){
+        localStorage.removeItem("user_data")
+        window.location="../index.html"
+    }
+</script>
 </html>

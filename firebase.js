@@ -321,92 +321,90 @@ window.update_edit=update_edit
 
 
 // /********************************** temblate_1 [index.html]********************************************************* */
-   
-//   getDocs(collection(db,"resume")).then(edit =>{
-//    let params = new URLSearchParams(document.location.search);    
-//    let index = params.get("id");
-//   edit.forEach((doc) =>{
-//   if(index==doc.id){
-//   let myresume=doc.data()
-//       document.getElementById("re_title").innerHTML=datas.title
-//       document.getElementById("re_name").innerHTML=datas.name
-//       document.getElementById("re_name_1").innerHTML=` ${datas.name}`
-//       document.getElementById("re_email").innerHTML=`EMAIL ID:${datas.email}`
-//       document.getElementById("re_contact").innerHTML=`CONTACT : ${datas.contact}`
-//       document.getElementById("re_objective").innerHTML=datas.objective
-//       document.getElementById("re_declaration").innerHTML=datas.declaration
-//       document.getElementById("re_place").innerHTML=`Location :${datas.place}`
-//       document.getElementById("re_dob").innerHTML=`BIRTHDAY :${datas.personal_details.dob}`
+   function edit_temp(){
+    let params = new URLSearchParams(document.location.search);    
+    let index = params.get("id");
+  getDocs(collection(db,"resume")).then(edit =>{
+  
+  edit.forEach((doc) =>{
+  if(index==doc.id){
+  let datas=doc.data()
+      document.getElementById("re_title").innerHTML=datas.title
+      document.getElementById("re_name").innerHTML=datas.name
+      document.getElementById("re_name_1").innerHTML=` ${datas.name}`
+      document.getElementById("re_email").innerHTML=`EMAIL ID:${datas.email}`
+      document.getElementById("re_contact").innerHTML=`CONTACT : ${datas.contact}`
+      document.getElementById("re_objective").innerHTML=datas.objective
+      document.getElementById("re_declaration").innerHTML=datas.declaration
+      document.getElementById("re_place").innerHTML=`Location :${datas.place}`
+      document.getElementById("re_dob").innerHTML=`BIRTHDAY :${datas.personal_details.dob}`
       
 
 
-//     //***********************skills*****************************
-//       let skilladd=''
-//     for(const each of datas.skills){
-//         skilladd=skilladd+`<p>${each}</p>`
-//     }
+    //***********************skills*****************************
+      let skilladd=''
+    for(const each of datas.skills){
+        skilladd=skilladd+`<p>${each}</p>`
+    }
 
-//     document.getElementById("re_skills").innerHTML=skilladd
-//      //***********************hobbies*****************************
-//     let hobbieadd=''
-//     for(const each of datas.hobbies){
-//         hobbieadd=hobbieadd+`<p>${each}</p> `
-//     }
+    document.getElementById("re_skills").innerHTML=skilladd
+     //***********************hobbies*****************************
+    let hobbieadd=''
+    for(const each of datas.hobbies){
+        hobbieadd=hobbieadd+`<p>${each}</p> `
+    }
 
-//     document.getElementById("re_hobbies").innerHTML=hobbieadd
+    document.getElementById("re_hobbies").innerHTML=hobbieadd
 
-//     //********************languages*************************
-//     let languageadd=''
-//     for(const each of datas.languages){
-//         languageadd=languageadd+`<p>${each}</p>`
-//     }
+    //********************languages*************************
+    let languageadd=''
+    for(const each of datas.languages){
+        languageadd=languageadd+`<p>${each}</p>`
+    }
 
-//     document.getElementById("re_language").innerHTML=languageadd
-
-
-//     //********************area_of_interest*************************
-//     let area_of_interestadd=''
-//     for(const each of datas.area_of_interest){
-//         area_of_interestadd=area_of_interestadd+`<p>${each}</p> `
-//     }
-
-//     document.getElementById("re_area_of interest").innerHTML=area_of_interestadd
+    document.getElementById("re_language").innerHTML=languageadd
 
 
-//  //*********************for loop education********************************
-//  let empty_education=""
-//  for(let each of datas.education_details){
-//    empty_education=empty_education+` <li class="time-line-item">
-//                        <span class="badge badge-primary">${each.pass_year}</span>
-//                        <h3 class="time-line-item-title">${each.course_name}</h3>
-//                        <p class="time-line-item-subtitle">${each.persentage}</p>
-//                         <p class="time-line-item-subtitle">${each.int_name}</p>
-//                    </li>`
-//  }
-//  document.getElementById("re_education").innerHTML=empty_education
+    //********************area_of_interest*************************
+    let area_of_interestadd=''
+    for(const each of datas.area_of_interest){
+        area_of_interestadd=area_of_interestadd+`<p>${each}</p> `
+    }
 
-//  //*************************************for in loop project**************************************
+    document.getElementById("re_area_of interest").innerHTML=area_of_interestadd
+
+
+ //*********************for loop education********************************
+ let empty_education=""
+ for(let each of datas.education_details){
+   empty_education=empty_education+` <li class="time-line-item">
+                       <span class="badge badge-primary">${each.pass_year}</span>
+                       <h3 class="time-line-item-title">${each.course_name}</h3>
+                       <p class="time-line-item-subtitle">${each.persentage}</p>
+                        <p class="time-line-item-subtitle">${each.int_name}</p>
+                   </li>`
+ }
+ document.getElementById("re_education").innerHTML=empty_education
+
+ //*************************************for in loop project**************************************
  
-//  let PROject=""
-//  for(let each of datas.project){
-//    PROject=PROject+` <li class="time-line-item">
-//     <span class="badge badge-primary">${each. duration}</span>
-//     <h3 class="time-line-item-title">${each.pro_name}</h3>
-//     <p class="time-line-item-subtitle">${each.team_member}</p>
-//      <p class="time-line-item-subtitle">${each.org_name}</p>
-//    </li>`
-//  }
+ let PROject=""
+ for(let each of datas.project){
+   PROject=PROject+` <li class="time-line-item">
+    <span class="badge badge-primary">${each. duration}</span>
+    <h3 class="time-line-item-title">${each.pro_name}</h3>
+    <p class="time-line-item-subtitle">${each.team_member}</p>
+     <p class="time-line-item-subtitle">${each.org_name}</p>
+   </li>`
+ }
        
-//   document.getElementById("re_project").innerHTML=PROject
+  document.getElementById("re_project").innerHTML=PROject
 
 
+  }
+  })
+ })
+}
+   window.edit_temp=edit_temp
 
-//   }
-
-//   })
-//   logout.addEventListener("click",(e) =>{
-//     localStorage.removeItem("user_data")
-//     window.location="../index.html"
-// })
-//   })
    
